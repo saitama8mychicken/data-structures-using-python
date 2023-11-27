@@ -2,6 +2,7 @@
 Here we will have  implementation of Single Linked List and its related operations
 """
 
+
 class Node:
     def __init__(self, data, next=None):
         self.data = data
@@ -44,6 +45,22 @@ class LinkedList:
         last_node.next = new_node
         self.length += 1
 
+    def insert_at_position(self, data, pos):
+        if pos > self.length:
+            raise ValueError("Index out of Range")
+
+        new_node = Node(data)
+        current = self.head
+        current_pos = 0
+        while current.next is not None:
+            if current_pos == pos:
+                break
+            current = current.next
+            current_pos += 1
+
+        new_node.next = current.next
+        current.next = new_node
+
     def delete_from_beginning(self):
         current = self.head
 
@@ -69,9 +86,6 @@ class LinkedList:
             last_previous_node.next = None
 
 
-
-
-
 if __name__ == "__main__":
     ll = LinkedList()
     ll.insert_at_beginning(22)
@@ -81,6 +95,6 @@ if __name__ == "__main__":
     ll.insert_at_end(38)
     # ll.delete_from_beginning()
     ll.print_linked_list()
-    print("hh")
-    ll.delete_from_end()
+    print("Trying Insertion at a pos")
+    ll.insert_at_position(232, 2)
     ll.print_linked_list()
